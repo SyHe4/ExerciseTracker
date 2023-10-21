@@ -22,9 +22,9 @@ const isActive = ref(false);
             Admin
           </a>
           <div class="navbar-dropdown has-background-grey-dark">
-            <a class="navbar-item" style="color: rgb(204, 51, 51);">
+            <RouterLink class="navbar-item" style="color: rgb(204, 51, 51);" to="/admin">
               Users
-            </a>
+            </RouterLink>
           </div>
         </div>
       </div>

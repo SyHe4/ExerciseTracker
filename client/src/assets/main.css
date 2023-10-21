@@ -42,11 +42,6 @@ body {
   display: inline;
   padding-left: 5.5vh;
 }
-.box {
-  background-color: rgb(54, 54, 54);
-  height: 15vh;
-  box-shadow: 0 0 1rem #0004;
-}
 i {
   padding-right: 1vh;
 }

@@ -15,13 +15,23 @@ const router = createRouter({
     {
       path: '/activity',
       name: 'activity',
-      component: () => import('../views/MyActivity.vue'),
-      beforeEnter: requireLogin,
+      component: () => import('../views/MyActivity.vue')
     },
     {
       path: '/friends',
       name: 'friends',
       component: () => import('../views/FriendActivity.vue')
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: () => import('../views/SearchFriends.vue')
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: () => import('../views/AdminUsers.vue'),
+      beforeEnter: requireLogin,
     },
   ],
 });
