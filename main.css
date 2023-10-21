@@ -1,0 +1,14 @@
+body {
+    background-color: rgb(95, 95, 139);
+    height: 100vh;
+}
+.navbar {
+    padding-left: 5vh;
+    padding-right: 5vh;
+}
+.box {
+    background-color: rgb(54, 54, 54);
+}
+i{
+    padding-right: 1vh;
+}

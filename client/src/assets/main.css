@@ -1,0 +1,61 @@
+@import url('https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css');
+@import url('https://use.fontawesome.com/releases/v6.4.2/js/all.js');
+
+body {
+  background-color: rgb(95, 95, 139);
+  height: 100vh;
+}
+.navbar {
+  margin-bottom: 2vh;
+  width: 100%;
+}
+.dist{
+  padding-left: 12vh;
+  padding-top: 2vh;
+  font-weight: bold;
+  font-size: xx-large;
+  display: inline-block;
+}
+.dur{
+  padding-left: 7vh;
+  padding-top: 2vh;
+  font-weight: bold;
+  font-size: xx-large;
+  display: inline-block;
+}
+.values{
+  padding-left: 6vh;
+  padding-top: 2vh;
+  font-weight: bold;
+  font-size: xx-large;
+  display: inline-block;
+}
+#colId{
+  display: inline;
+  padding-left: 7vh;
+}
+#tWId{
+  display: inline;
+  padding-left: 4vh;
+}
+#aTId{
+  display: inline;
+  padding-left: 5.5vh;
+}
+.box {
+  background-color: rgb(54, 54, 54);
+  height: 15vh;
+  box-shadow: 0 0 1rem #0004;
+}
+i {
+  padding-right: 1vh;
+}
+.notification {
+  background-color: rgb(54, 54, 54);
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(180, 2%, 12%, 0.726);
+  }
+}
