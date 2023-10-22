@@ -12,10 +12,30 @@ const isActive = ref(false);
 
     <div id="navbarBasicExample" class="navbar-menu" :class="{ 'is-active': isActive }">
       <div class="navbar-start">
-        <RouterLink class="navbar-item" style="color: rgb(204, 51, 51);" to="/" >Home</RouterLink>
-        <RouterLink class="navbar-item" style="color: rgb(204, 51, 51);" to="/activity">My Activity</RouterLink>
-        <RouterLink class="navbar-item" style="color: rgb(204, 51, 51);" to="/friends">Friend Activity</RouterLink>
-        <RouterLink class="navbar-item" style="color: rgb(204, 51, 51);" to="/search">Search for Friends</RouterLink>
+        <RouterLink class="navbar-item" style="color: rgb(204, 51, 51);" to="/" >
+        <span class="icon">
+          <i class="fas fa-dumbbell"></i>
+        </span>
+        Home
+        </RouterLink>
+        <RouterLink class="navbar-item" style="color: rgb(204, 51, 51);" to="/activity">
+          <span class="icon">
+            <i class="fas fa-running"></i>
+          </span>
+          My Activity
+        </RouterLink>
+        <RouterLink class="navbar-item" style="color: rgb(204, 51, 51);" to="/friends">
+          <span class="icon">
+            <i class="fas fa-users"></i>
+          </span>
+          Friend Activity
+        </RouterLink>
+        <RouterLink class="navbar-item" style="color: rgb(204, 51, 51);" to="/search">
+          <span class="icon">
+            <i class="fas fa-user-plus"></i>
+          </span>
+          Search for Friends
+        </RouterLink>
 
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link" style="color: rgb(204, 51, 51);">
