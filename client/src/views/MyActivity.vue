@@ -1,6 +1,13 @@
 <script setup lang="ts">
-    import { ref } from 'vue'
-    const open = ref(false)
+import { openForm, closeForm } from '@/model/workout'
+
+const doOpenForm = () => {
+    openForm();
+}
+
+const doCloseForm = () => {
+    closeForm();
+}
 </script>
 
 <template>
@@ -11,12 +18,18 @@
     </div>
     <div class="columns">
         <div class="column is-half is-offset-one-quarter">
-            <button class="button is-dark" style="background-color: rgb(204, 51, 51); color: white;" @click="open = true">
+            <button class="button is-dark" style="background-color: rgb(204, 51, 51); color: white;" @click = "doOpenForm">
                 Add Workout
             </button>
-            <form v-if="open">
-            <div v-if="open" class="modal">
-                <div class="field">
+            <div class="modal" id="addWorkout">
+                <div class="modal-background"></div>
+                <div class="modal-card">
+                    <header class="modal-card-head">  
+                        <p class="modal-card-title"> Add Workout </p>
+                        <button class="delete" aria-label="close" id="addWorkout" @click = "doCloseForm"></button>
+                    </header>
+                    <section class="modal-card-body">
+                        <div class="field">
                 <label class="label">Title</label>
                 <div class="control">
                     <input class="input" type="text">
@@ -59,9 +72,13 @@
                     </select>
                 </div>
                 </div>
-                <button @click="open = false">Save changes</button>
+                    </section>
+                    <footer class="modal-card-foot">
+                        <button> Save changes </button>
+                        <button id="addWorkout" @click = "doCloseForm"> Cancel </button>
+                    </footer>
+                </div>
             </div>
-        </form>
         <div class="box">
             <article class="media">
                 <div class="media-left">
@@ -153,13 +170,12 @@
     color: #383838;
     padding-left: 10vh;
 }
-.modal {
-  position: fixed;
-  z-index: 999;
+.modal-card{
   top: 20%;
   left: 50%;
-  width: 300px;
-  margin-left: -150px;
+  width: 800px;
+  margin-left: -350px;
+  margin-top: -50px;
 }
 .info {
     font-size: x-large;

@@ -9,7 +9,7 @@
           Let's move today!
         </div>
         <div class="box" style="color: rgb(204, 51, 51);">
-          Today
+          <u> Today </u>
           <div class="column" id="colId">
             Distance
           </div>
@@ -36,7 +36,7 @@
           </h3>
         </div>
         <div class="box" style="color: rgb(204, 51, 51);">
-          This Week
+          <u> This Week </u>
           <div class="column" id="tWId">
             Distance
           </div>
@@ -63,7 +63,7 @@
           </h3>
         </div>
         <div class="box" style="color: rgb(204, 51, 51);">
-          All Time
+          <u> All Time </u>
           <div class="column" id="aTId">
             Distance
           </div>
