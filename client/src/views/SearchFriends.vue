@@ -1,5 +1,10 @@
 <script setup lang="ts">
-
+import { getUsers, type User } from '@/model/users';
+import { ref } from 'vue';
+const users = ref([] as User[]);
+getUsers().then((data) => {
+    users.value = data;
+})
 </script>
 
 <template>
@@ -14,7 +19,10 @@
         <div class="control">
             <input class="input" type="text" placeholder="Search">
         </div>
-    </div>
+            </div>
+        <div class="box" v-for="user in users" :key="user.id">
+        {{ user.firstName }} {{ user.lastName }}
+        </div>
         </div>
     </div>
 </template>

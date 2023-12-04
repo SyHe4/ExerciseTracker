@@ -43,6 +43,12 @@ const doCloseForm = () => {
                 </div>
                 </div>
                 <div class="field">
+                <label class="label">Distance</label>
+                <div class="control">
+                    <input class="input" type="text">
+                </div>
+                </div>
+                <div class="field">
                 <label class="label">Duration</label>
                 <div class="control">
                     <input class="input" type="text">

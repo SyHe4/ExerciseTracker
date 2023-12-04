@@ -1,8 +1,17 @@
 <script setup lang="ts">
-
+import { getUsers, type User } from '@/model/users';
+import { ref } from 'vue';
+const users = ref([] as User[]);
+getUsers().then((data) => {
+    users.value = data;
+})
 </script>
 
 <template>
+    <div class="box" v-for="user in users" :key="user.id">
+        {{ user.firstName }} {{ user.lastName }}
+    </div>
+
     <div>
         <h1 class="title">Users</h1>
         <a class="button is-dark" style="background-color:rgb(204, 51, 51); color: white;">

@@ -1,6 +1,11 @@
 <script setup lang="ts">
-import { openForm, closeForm } from '@/model/workout'
-
+import { openForm, closeForm } from '@/model/workout';
+import { getPosts, type Post } from '@/model/posts';
+import { ref } from 'vue'
+const posts = ref([] as Post[])
+getPosts().then((data) => {
+    posts.value = data
+})
 const doOpenForm = () => {
     openForm();
 }
@@ -40,6 +45,12 @@ const doCloseForm = () => {
                 <label class="label">Date</label>
                 <div class="control">
                     <input class="input" type="date" placeholder="mm/dd/yyyy">
+                </div>
+                </div>
+                <div class="field">
+                <label class="label">Distance</label>
+                <div class="control">
+                    <input class="input" type="text">
                 </div>
                 </div>
                 <div class="field">
@@ -202,6 +213,49 @@ const doCloseForm = () => {
                 </div>
             </article>
         </div>
+        <div v-for="post in posts" :key="post.id" class="post">
+            <div class="box">
+            <article class="media">
+                <div class="media-left">
+                    <figure class="image is-64x64">
+                        <img :src="post.picture" :alt="post.title"/>
+                    </figure>
+                </div>
+                <div class="media-content">
+                <div class="content">
+                <p>
+                <strong>{{ post.name }}</strong> <small>{{ post.username }}</small> <small>{{ post.date }}</small>
+                <br>
+                {{ post.title }} - {{ post.location }}
+                <br>
+                <pre class="info">
+                Distance: {{ post.distance }}    Duration: {{ post.duration }}
+                </pre>
+                </p>
+                </div>
+                <nav class="level is-mobile">
+                    <div class="level-left">
+                    <a class="level-item" aria-label="reply">
+                        <span class="icon is-small">
+                        <i class="fas fa-reply" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                    <a class="level-item" aria-label="retweet">
+                        <span class="icon is-small">
+                        <i class="fas fa-retweet" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                    <a class="level-item" aria-label="like">
+                        <span class="icon is-small">
+                        <i class="fas fa-heart" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                    </div>
+                </nav>
+                </div>
+            </article>
+        </div>
+        </div>
     </div>
 </div>
 </template>
@@ -216,7 +270,7 @@ const doCloseForm = () => {
   left: 50%;
   width: 800px;
   margin-left: -350px;
-  margin-top: -50px;
+  margin-top: -90px;
 }
 .info {
     font-size: x-large;
