@@ -21,7 +21,7 @@ getUsers().then((data) => {
         </div>
             </div>
         <div class="box" v-for="user in users" :key="user.id">
-        {{ user.firstName }} {{ user.lastName }}
+        {{ user.firstName }} {{ user.lastName }} {{ user.username }}
         </div>
         </div>
     </div>
