@@ -1,4 +1,4 @@
-const express = requre('express');
+const express = require('express');
 const { getAll, get, search, create, update, remove } = require('../models/posts');
 const router = express.Router();
 
