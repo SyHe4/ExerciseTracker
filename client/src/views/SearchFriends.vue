@@ -4,7 +4,15 @@ import { ref } from 'vue';
 const users = ref([] as User[]);
 getUsers().then((data) => {
     users.value = data;
-})
+});
+const searchbar = () => {
+    const input = (document.getElementById('searchInput') as HTMLInputElement).value.toLowerCase();
+    const filteredUsers = users.value.filter((user) => {
+        const fullName = `${user.firstName} ${user.lastName}`.toLowerCase();
+        return fullName.includes(input) || user.username.toLowerCase().includes(input);
+    });
+    users.value = filteredUsers;
+}
 </script>
 
 <template>
@@ -17,11 +25,11 @@ getUsers().then((data) => {
         <div class="column is-half is-offset-one-quarter">
             <div class="field">
         <div class="control">
-            <input class="input" type="text" placeholder="Search">
+            <input class="input" id ="searchInput" type="text" placeholder="Search" onkeyup="searchbar()">
         </div>
             </div>
         <div class="box" v-for="user in users" :key="user.id">
-        {{ user.firstName }} {{ user.lastName }} {{ user.username }}
+        {{ user.firstName }} {{ user.lastName }} @{{ user.username }}
         </div>
         </div>
     </div>

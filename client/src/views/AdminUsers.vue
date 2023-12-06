@@ -5,19 +5,69 @@ const users = ref([] as User[]);
 getUsers().then((data) => {
     users.value = data;
 })
+import { openForm, closeForm } from '@/model/form'
+
+const doOpenForm = () => {
+    openForm();
+}
+
+const doCloseForm = () => {
+    closeForm();
+}
 </script>
 
 <template>
-    <div class="box" v-for="user in users" :key="user.id">
-        {{ user.firstName }} {{ user.lastName }}
-    </div>
-
     <div>
         <h1 class="title">Users</h1>
-        <a class="button is-dark" style="background-color:rgb(204, 51, 51); color: white;">
+        <a class="button is-dark" style="background-color:rgb(204, 51, 51); color: white;" @click = "doOpenForm">
             Add User
         </a>
-        <table class="table is-bordered ">
+        <div class="modal" id="formBtn">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title"> Add User </p>
+                    <button class="delete" aria-label="close" id="formBtn" @click = "doCloseForm"></button>
+                </header>
+                <section class="modal-card-body">
+                    <div class="field">
+                        <label class="label"> First Name </label>
+                        <div class="control">
+                            <input class="input" type="text">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label"> Last Name </label>
+                        <div class="control">
+                            <input class="input" type="text">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label"> Username </label>
+                        <div class="control">
+                            <input class="input" type="text">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label"> Email </label>
+                        <div class="control">
+                            <input class="input" type="text">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label"> Password </label>
+                        <div class="control">
+                            <input class="input" type="text">
+                        </div>
+                    </div>
+                </section>
+                <footer class="modal-card-foot">
+                    <button> Save changes </button>
+                    <button id="formBtn" @click = "doCloseForm"> Cancel </button>
+                </footer>
+            </div>
+        </div>
+        <table class="table is-bordered">
             <tr>
                 <th>First Name</th>
                 <th>Last Name</th>
@@ -25,26 +75,12 @@ getUsers().then((data) => {
                 <th>Handle</th>
                 <th>Admin</th>
             </tr>
-            <tr>
-                <td>Moshe</td>
-                <td>Plotkin</td>
-                <td>["plotkinm@newpaltz.edu"]</td>
-                <td>JewPaltz</td>
-                <td>true</td>
-            </tr>
-            <tr>
-                <td>Sheldon</td>
-                <td>Quigley</td>
-                <td>["hbingley1@plala.or.jp"]</td>
-                <td>hbingley1</td>
-                <td>false</td>
-            </tr>
-            <tr>
-                <td>Terrill</td>
-                <td>Hills</td>
-                <td>["rshawe2@51.la"]</td>
-                <td>rshawe2</td>
-                <td>false</td>
+            <tr v-for="user in users" :key="user.id">
+                <td>{{ user.firstName }}</td>
+                <td>{{ user.lastName }}</td>
+                <td>["{{ user.email }}"]</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.role }}</td>
             </tr>
         </table>
     </div>
@@ -58,8 +94,15 @@ getUsers().then((data) => {
 a {
     margin-left: 70vh;
 }
+.modal-card{
+  top: 20%;
+  left: 50%;
+  width: 800px;
+  margin-left: -350px;
+  margin-top: -90px;
+}
 .title {
     color: #383838;
     padding-left: 10vh;
 }
-</style>
+</style>@/model/form

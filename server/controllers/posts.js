@@ -49,5 +49,12 @@ router.get('/', (req, res, next) => {
     })
     .catch(next);
 })
+.post('/seed', (req, res, next) => {
+    seed()
+    .then(() => {
+        res.send({message: 'Posts seeded'});
+    })
+    .catch(next);
+})
 
 module.exports = router;

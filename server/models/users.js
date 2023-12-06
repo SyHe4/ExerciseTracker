@@ -69,10 +69,15 @@ async function login(email, password) {
   if(item.password !== password) {
     throw new Error('Wrong password');
   }
-
-  const user = {...item, password: undefined, };
+  if(item.id === 1){
+    const user = {...item, password: undefined, admin: true};
+    const token = await generateJWT(user);
+  return {user, token};
+  }else{
+  const user = {...item, password: undefined, admin: false};
   const token = await generateJWT(user);
   return {user, token};
+  }
 }
 
 function update(newValues) {

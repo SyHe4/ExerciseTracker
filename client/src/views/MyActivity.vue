@@ -1,5 +1,11 @@
 <script setup lang="ts">
-import { openForm, closeForm } from '@/model/workout'
+import { openForm, closeForm } from '@/model/form';
+import { getPosts, type Post } from '@/model/posts';
+import { ref } from 'vue';
+const posts = ref([] as Post[])
+getPosts().then((data) => {
+    posts.value = data
+})
 
 const doOpenForm = () => {
     openForm();
@@ -21,12 +27,12 @@ const doCloseForm = () => {
             <button class="button is-dark" style="background-color: rgb(204, 51, 51); color: white;" @click = "doOpenForm">
                 Add Workout
             </button>
-            <div class="modal" id="addWorkout">
+            <div class="modal" id="formBtn">
                 <div class="modal-background"></div>
                 <div class="modal-card">
                     <header class="modal-card-head">  
                         <p class="modal-card-title"> Add Workout </p>
-                        <button class="delete" aria-label="close" id="addWorkout" @click = "doCloseForm"></button>
+                        <button class="delete" aria-label="close" id="formBtn" @click = "doCloseForm"></button>
                     </header>
                     <section class="modal-card-body">
                         <div class="field">
@@ -81,7 +87,7 @@ const doCloseForm = () => {
                     </section>
                     <footer class="modal-card-foot">
                         <button> Save changes </button>
-                        <button id="addWorkout" @click = "doCloseForm"> Cancel </button>
+                        <button id="formBtn" @click = "doCloseForm"> Cancel </button>
                     </footer>
                 </div>
             </div>
@@ -181,9 +187,9 @@ const doCloseForm = () => {
   left: 50%;
   width: 800px;
   margin-left: -350px;
-  margin-top: -50px;
+  margin-top: -120px;
 }
 .info {
     font-size: x-large;
 }
-</style>
+</style>@/model/form

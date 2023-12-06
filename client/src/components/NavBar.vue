@@ -1,10 +1,16 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { RouterLink } from 'vue-router';
 import LoginBadge from './LoginBadge.vue';
-
+import { getUsers, type User } from '@/model/users';
+const users = ref([] as User[]);
+getUsers().then((data) => {
+    users.value = data;
+})
 const isActive = ref(false);
-
+const isAdmin = computed(() => {
+  return users.value.length > 0 && users.value[0].role === true;
+});
 </script>
 
 <template>
@@ -37,7 +43,7 @@ const isActive = ref(false);
           Search for Friends
         </RouterLink>
 
-        <div class="navbar-item has-dropdown is-hoverable">
+        <div class="navbar-item has-dropdown is-hoverable" v-if="isAdmin">
           <a class="navbar-link" style="color: rgb(204, 51, 51);">
             Admin
           </a>
