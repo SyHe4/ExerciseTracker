@@ -43,7 +43,7 @@ const isAdmin = computed(() => {
           Search for Friends
         </RouterLink>
 
-        <div class="navbar-item has-dropdown is-hoverable" v-if="isAdmin">
+        <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link" style="color: rgb(204, 51, 51);">
             Admin
           </a>

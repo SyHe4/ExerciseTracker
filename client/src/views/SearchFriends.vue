@@ -1,17 +1,13 @@
 <script setup lang="ts">
 import { getUsers, type User } from '@/model/users';
+import { searchbar } from '@/model/searchbar';
 import { ref } from 'vue';
 const users = ref([] as User[]);
 getUsers().then((data) => {
     users.value = data;
 });
-const searchbar = () => {
-    const input = (document.getElementById('searchInput') as HTMLInputElement).value.toLowerCase();
-    const filteredUsers = users.value.filter((user) => {
-        const fullName = `${user.firstName} ${user.lastName}`.toLowerCase();
-        return fullName.includes(input) || user.username.toLowerCase().includes(input);
-    });
-    users.value = filteredUsers;
+const doSearchbar = () => {
+    searchbar();
 }
 </script>
 
@@ -25,7 +21,7 @@ const searchbar = () => {
         <div class="column is-half is-offset-one-quarter">
             <div class="field">
         <div class="control">
-            <input class="input" id ="searchInput" type="text" placeholder="Search" onkeyup="searchbar()">
+            <input class="input" id ="myInput" type="text" placeholder="Search" v-on:keyup="doSearchbar">
         </div>
             </div>
         <div class="box" v-for="user in users" :key="user.id">
