@@ -1,10 +1,15 @@
 <script setup lang="ts">
 import { openForm, closeForm } from '@/model/form';
 import { getPosts, type Post } from '@/model/posts';
-import { ref } from 'vue';
+import { getUsers, searchUsers, type User } from '@/model/users';
+import { ref, computed } from 'vue';
 const posts = ref([] as Post[])
 getPosts().then((data) => {
     posts.value = data
+})
+const users = ref([] as User[]);
+getUsers().then((data) => {
+    users.value = data;
 })
 
 const doOpenForm = () => {
@@ -13,6 +18,50 @@ const doOpenForm = () => {
 
 const doCloseForm = () => {
     closeForm();
+}
+const isFetching = ref(false);
+const page = ref(1);
+const totalPages = ref(1);
+
+const data = ref<User[]>([]);
+const name = ref("");
+
+async function getAsyncData(_name: string) {
+    if (name.value !== _name) {
+        name.value = _name;
+        data.value = [];
+        page.value = 1;
+        totalPages.value = 1;
+    }
+
+    // String cleared
+    if (!_name.length) {
+        data.value = [];
+        page.value = 1;
+        totalPages.value = 1;
+        return;
+    }
+
+    // Reached last page
+    if (page.value > totalPages.value) {
+        return;
+    }
+
+    isFetching.value = true;
+    try {
+        const data = await searchUsers(_name, page.value);
+        data.value = [...data.value, ..._data];
+        page.value += 1;
+        totalPages.value = 1 //_data.total_pages;
+    } catch (err) {
+        console.error(err);
+    } finally {
+        isFetching.value = false;
+    }
+}
+
+function getMoreAsyncData() {
+    getAsyncData(name.value);
 }
 </script>
 
@@ -36,9 +85,37 @@ const doCloseForm = () => {
                     </header>
                     <section class="modal-card-body">
                         <div class="field">
-                <label class="label">Title</label>
+                <label class="label">Title/Description</label>
                 <div class="control">
                     <input class="input" type="text">
+                    <o-autocomplete
+                        :data="data"
+                        placeholder="You can tag your friends here"
+                        field="title"
+                        :loading="isFetching"
+                        check-scroll
+                        open-on-focus
+                        :debounce="500"
+                        @input="getAsyncData"
+                        @scroll-end="getMoreAsyncData">
+                        <template #default="props">
+                            <div class="media">
+                                <div class="media-left">
+                                    <img
+                                        width="32"
+                                        :src="props.options.thumbnail" />
+                                </div>
+                                <div class="media-content">
+                                    {{ props.option.title }}
+                                </div>
+                            </div>
+                        </template>
+                        <template v-if="page > totalPages" #footer>
+                            <span class="ex-text-grey">
+                                Thats it! No more users found.
+                            </span>
+                        </template>
+                    </o-autocomplete>
                 </div>
                 </div>
 
